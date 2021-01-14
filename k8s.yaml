@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-petclinic-delpoy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-petclinic-app
+      version: green
+  template:
+    metadata:
+      name: spring-petclinic-pod
+      labels:
+        app: spring-petclinic-app
+        version: green
+    spec:
+      containers:
+      - name: spring-petclinic-container
+        image: docker.io/kamabullet/spring-petclinic:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service 
+metadata:
+  name: spring-petclinic-svc
+  labels:
+    app: spring-petclinic-app
+spec:
+  selector:
+    app: spring-petclinic-app
+    version: green
+  type: NodePort
+  ports:
+  - nodePort: 31113
+    port: 8080
+    targetPort: 8080
