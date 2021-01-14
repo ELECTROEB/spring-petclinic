@@ -7,11 +7,11 @@ pipeline {
     }
 
     stages {
-        stage('SCM') {
-            steps {
-                git branch:'main', url:'https://github.com/ELECTROEB/spring-petclinic.git'
-            }
-        }
+//        stage('SCM') {
+//            steps {
+//                git branch:'main', url:'https://github.com/ELECTROEB/spring-petclinic.git'
+//            }
+//        }
 
         stage('Build') {
             steps {
