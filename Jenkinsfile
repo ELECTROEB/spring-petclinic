@@ -12,18 +12,18 @@ pipeline {
                 git branch:'main', url:'https://github.com/ELECTROEB/spring-petclinic.git'
             }
         }
-    }
 
-    stage('Build') {
-        steps {
-            withMaven(maven:'mvn-3.6.3') {
-                sh "mvn package"
+        stage('Build') {
+            steps {
+                withMaven(maven:'mvn-3.6.3') {
+                    sh "mvn package"
+                }
             }
-        }
-        post {
-            success {
-                junit '**/target/surefire-reports/TEST-*.xml'
-                archiveArtifacts 'target/*.jar'
+            post {
+                success {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+                }
             }
         }
     }
